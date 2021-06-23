@@ -16,6 +16,7 @@ class NewsListingBloc extends Bloc<NewsListingEvent, NewsListingState> {
   Stream<NewsListingState> mapEventToState(NewsListingEvent event) async* {
     yield NewsFetchingState();
     late NewsApiResult news;
+
     try {
       if (event is InitialNewsEvent) {
         news = await newsRepository!.fetchNewsByQuery('');

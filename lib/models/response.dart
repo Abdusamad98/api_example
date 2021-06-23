@@ -13,6 +13,7 @@ class Response {
   int startIndex;
   String status;
   int total;
+  @JsonKey(defaultValue: '', name: '')
   String userTier;
 
   Response(

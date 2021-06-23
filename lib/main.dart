@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
       create: (BuildContext context) =>
           NewsListingBloc(newsRepository: newsRepository),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Api Example',
         theme: ThemeData(
           fontFamily: "GoogleSans",
