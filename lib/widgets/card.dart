@@ -74,14 +74,31 @@ class NewsCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Is Hosted: ',
-                    style: commonStyle,
+                  Row(
+                    children: [
+                      Text(
+                        'Pillar Name: ',
+                        style: commonStyle,
+                      ),
+                      Text(
+                        result.pillarName,
+                        style: textStyle,
+                      ),
+                    ],
                   ),
-                  Text(
-                    result.isHosted ? 'Yes' : 'No',
-                    style: textStyle,
+                  Row(
+                    children: [
+                      Text(
+                        'Is Hosted: ',
+                        style: commonStyle,
+                      ),
+                      Text(
+                        result.isHosted ? 'Yes' : 'No',
+                        style: textStyle,
+                      ),
+                    ],
                   ),
                 ],
               ),

@@ -4,8 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchBar extends StatelessWidget {
+  final bool isDelete;
+
+  TextEditingController controller = TextEditingController();
+
+  SearchBar({required this.isDelete});
+
   @override
   Widget build(BuildContext context) {
+    if (isDelete) controller.clear();
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
@@ -13,6 +20,7 @@ class SearchBar extends StatelessWidget {
         borderRadius: BorderRadius.all(Radius.circular(20.0)),
       ),
       child: TextField(
+        controller: controller,
         style: TextStyle(color: Colors.white),
         onChanged: (term) {
           print(term);

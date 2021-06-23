@@ -16,26 +16,18 @@ class NewsListingBloc extends Bloc<NewsListingEvent, NewsListingState> {
   Stream<NewsListingState> mapEventToState(NewsListingEvent event) async* {
     yield NewsFetchingState();
     late NewsApiResult news;
-    print('Si');
     try {
       if (event is InitialNewsEvent) {
-        print('Si0');
         news = await newsRepository!.fetchNewsByQuery('');
-        print('Si1');
       } else if (event is SearchTextChangedEvent) {
         news = await newsRepository!.fetchNewsByQuery(event.searchTerm);
-        print('Si2');
       }
       if (news.response.results.isEmpty) {
         yield NewsEmptyState();
-        print('Si3');
       } else {
         yield NewsFetchedState(news: news);
-        print('Si4');
       }
     } catch (error) {
-      print(error);
-      print('Si5');
       yield NewsErrorState();
     }
   }

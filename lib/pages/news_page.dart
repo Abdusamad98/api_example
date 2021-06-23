@@ -6,14 +6,24 @@ import 'package:api_example/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class NewsPage extends StatelessWidget {
+class NewsPage extends StatefulWidget {
   static const String routeName = 'newsRoute';
+
+  @override
+  _NewsPageState createState() => _NewsPageState();
+}
+
+class _NewsPageState extends State<NewsPage> {
+  var isDelete = false;
 
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<NewsListingBloc>(context).add(InitialNewsEvent());
 
     Future<void> _refresh() async {
+      setState(() {
+        isDelete = true;
+      });
       BlocProvider.of<NewsListingBloc>(context).add(InitialNewsEvent());
     }
 
@@ -36,7 +46,9 @@ class NewsPage extends StatelessWidget {
             SizedBox(
               height: 20.0,
             ),
-            SearchBar(),
+            SearchBar(
+              isDelete: isDelete,
+            ),
             SizedBox(
               height: 20.0,
             ),
@@ -66,6 +78,49 @@ class NewsPage extends StatelessWidget {
                           ),
                         ),
                       )),
+                    ),
+                  );
+                } else if (state is NewsEmptyState) {
+                  return Expanded(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            Icons.hourglass_empty,
+                            color: Colors.red,
+                          ),
+                          iconSize: 100,
+                          onPressed: null,
+                        ),
+                        Text(
+                          'Empty...',
+                          style: TextStyle(fontSize: 25.0, color: Colors.white),
+                        )
+                      ],
+                    ),
+                  );
+                } else if (state is NewsEmptyState) {
+                  return Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(
+                              Icons.wifi_off,
+                              color: Colors.red,
+                            ),
+                            iconSize: 100,
+                            onPressed: null,
+                          ),
+                          Text(
+                            'Error! ',
+                            style:
+                                TextStyle(fontSize: 25.0, color: Colors.white),
+                          )
+                        ],
+                      ),
                     ),
                   );
                 } else
