@@ -20,6 +20,7 @@ class NewsListingBloc extends Bloc<NewsListingEvent, NewsListingState> {
       if (event is InitialNewsEvent) {
         news = await newsRepository!.fetchNewsByQuery('');
       } else if (event is SearchTextChangedEvent) {
+        yield NewsFetchingState();
         news = await newsRepository!.fetchNewsByQuery(event.searchTerm);
       }
       if (news.response.results.isEmpty) {

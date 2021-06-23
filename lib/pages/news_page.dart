@@ -82,25 +82,28 @@ class _NewsPageState extends State<NewsPage> {
                   );
                 } else if (state is NewsEmptyState) {
                   return Expanded(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Icons.hourglass_empty,
-                            color: Colors.red,
+                    child: Center(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          IconButton(
+                            icon: Icon(
+                              Icons.hourglass_empty,
+                              color: Colors.red,
+                            ),
+                            iconSize: 100,
+                            onPressed: null,
                           ),
-                          iconSize: 100,
-                          onPressed: null,
-                        ),
-                        Text(
-                          'Empty...',
-                          style: TextStyle(fontSize: 25.0, color: Colors.white),
-                        )
-                      ],
+                          Text(
+                            'Empty...',
+                            style:
+                                TextStyle(fontSize: 25.0, color: Colors.white),
+                          )
+                        ],
+                      ),
                     ),
                   );
-                } else if (state is NewsEmptyState) {
+                } else if (state is NewsErrorState) {
                   return Expanded(
                     child: Center(
                       child: Column(
